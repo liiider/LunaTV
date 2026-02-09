@@ -372,12 +372,12 @@ function getUpstashRedisClient(): Redis {
   let client: Redis | undefined = (global as any)[globalKey];
 
   if (!client) {
-    const upstashUrl = process.env.UPSTASH_URL;
-    const upstashToken = process.env.UPSTASH_TOKEN;
+    const upstashUrl = process.env.UPSTASH_URL || process.env.KV_REST_API_URL;
+    const upstashToken = process.env.UPSTASH_TOKEN || process.env.KV_REST_API_TOKEN;
 
     if (!upstashUrl || !upstashToken) {
       throw new Error(
-        'UPSTASH_URL and UPSTASH_TOKEN env variables must be set'
+        'UPSTASH_URL and UPSTASH_TOKEN (or KV_REST_API_URL and KV_REST_API_TOKEN) env variables must be set'
       );
     }
 

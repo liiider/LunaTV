@@ -71,6 +71,25 @@
 
 本项目**仅支持 Docker 或其他基于 Docker 的平台** 部署。
 
+### Vercel 一键部署 (推荐)
+
+点击下方按钮即可一键部署到 Vercel：
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fliiider%2FLunaTV&env=USERNAME,PASSWORD,NEXT_PUBLIC_SITE_NAME,NEXT_PUBLIC_STORAGE_TYPE,UPSTASH_URL,UPSTASH_TOKEN&envDescription=%E8%AF%B7%E5%8A%A1%E5%BF%85%E5%A1%AB%E5%86%99%E6%89%80%E6%9C%89%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%8C%E5%90%A6%E5%88%99%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C%E3%80%82%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B%E8%AF%B7%E5%A1%AB%20upstash&project-name=moontv&repository-name=moontv)
+
+**Vercel 部署注意**：
+- 由于 Vercel 是 Serverless 环境，推荐使用 **Upstash Redis** 作为数据存储以获得完整体验。
+- **方案 A (推荐)：使用 Vercel KV (Redis)**
+    1. 在 Vercel 项目设置页，点击 **Storage** -> **Create Database** -> **KV** (选择 Upstash Redis)。
+    2. 创建成功后，Vercel 会自动注入环境变量 (`KV_REST_API_URL` 等)。
+    3. 项目会自动识别并使用该数据库，无需额外配置。
+    4. **优势**：完整功能（多端同步、后台管理配置可保存），免费额度足够个人使用。
+
+- **方案 B (Lite 模式 - 仅本地)**：
+    - 环境变量 `NEXT_PUBLIC_STORAGE_TYPE` 填 `localstorage`。
+    - **无需** Upstash Redis。
+    - **限制**：数据仅保存在当前浏览器，无法多端同步；管理后台修改的配置无法持久保存（重启失效）；直播源无法自动更新。
+
 ### zeabur 一键部署
 
 点击下方按钮即可一键部署，自动配置 LunaTV + Kvrocks 数据库：
